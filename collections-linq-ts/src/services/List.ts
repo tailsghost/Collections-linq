@@ -13,7 +13,7 @@ export default class List<T> extends Collection<T> implements IList<T> {
     constructor(capacity = 4) {
         super();
         const cap = capacity >=4 ? capacity : 4;
-        this._items = new Array(cap);
+        this._items = new Array<T>(cap);
         this._capacity = cap;
         this._size = 0;
     }
@@ -21,10 +21,7 @@ export default class List<T> extends Collection<T> implements IList<T> {
     private EnsureCapacity(min: number) {
         if(this._capacity >= min) return;
         this._capacity = this._capacity * 2;
-        const tmp = new Array<T | undefined>(this._capacity);
-        for (let i = 0; i < this._size; i++) 
-            tmp[i] = this._items[i];
-        this._items = tmp;
+        this._items.length = this._capacity;
     }
 
 
@@ -95,12 +92,9 @@ export default class List<T> extends Collection<T> implements IList<T> {
     }
 
     Sort(comparer?: (a: T, b: T) => number): void {
-        const arr = new Array<T>(this._size);
-        this._items.length = this._size;
         const data = this._items as T[];
-
         comparer ? data.sort(comparer) : data.sort();
-        this._items.length = this._capacity;
+        this._items = data;
     }
 
     Reverse(): void {
