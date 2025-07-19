@@ -10,6 +10,10 @@ export default class List<T> extends Collection<T> implements IList<T> {
         return this._size;
     }
 
+    ToArray() : T[] {
+       return this._items as T[];
+    }
+
     constructor(capacity = 4) {
         super();
         const cap = capacity >=4 ? capacity : 4;

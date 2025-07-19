@@ -80,27 +80,14 @@ export abstract class EnumerableCollection<T> implements IEnumerable<T> {
   }
 
   ToArray(): T[] {
-    if (this instanceof Array) {
-      return this as T[];
-    }
-    const result: T[] = new Array<T>(this.Count());
-
-    if (this instanceof List) {
-      const count = this.Count();
-      for (let i = 0; i < count; i++) {
-        result.push(this.Get(i));
-      }
-    }
-    return result;
+    return Array<T>();
   }
 
   ToList(): List<T> {
     if (this instanceof List) {
       return this as List<T>;
     }
-    const result = new List<T>(this.Count());
-    for (const x of this) result.Add(x);
-    return result;
+    return new List<T>();
   }
 
   ForEach(action: (item: T) => void): void {
