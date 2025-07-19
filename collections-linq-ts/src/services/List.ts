@@ -2,6 +2,7 @@ import IList from "../interfaces/IList.js";
 import { Collection } from "./Collection.js";
 
 export default class List<T> extends Collection<T> implements IList<T> {
+    private _size: number
     private _items: (T | undefined)[];
     private _capacity = 0;
 
@@ -14,6 +15,7 @@ export default class List<T> extends Collection<T> implements IList<T> {
         const cap = capacity >=4 ? capacity : 4;
         this._items = new Array(cap);
         this._capacity = cap;
+        this._size = 0;
     }
 
     private EnsureCapacity(min: number) {

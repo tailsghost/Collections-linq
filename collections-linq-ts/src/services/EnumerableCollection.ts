@@ -2,7 +2,6 @@ import { IEnumerable } from "../interfaces/IEnumerable.js";
 import List from "./List.js";
 
 export abstract class EnumerableCollection<T> implements IEnumerable<T> {
-  protected _size: number = 0;
   abstract [Symbol.iterator](): Iterator<T>;
 
   Where(predicate: (item: T) => boolean): IEnumerable<T> {
@@ -73,7 +72,11 @@ export abstract class EnumerableCollection<T> implements IEnumerable<T> {
   }
 
   Count(): number {
-    return this._size;
+    if(this instanceof Array) {
+      return this.length
+    }
+    
+    return 0;
   }
 
   ToArray(): T[] {
