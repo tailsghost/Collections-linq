@@ -91,13 +91,14 @@ export default class List<T> extends Collection<T> implements IList<T> {
         return value;
     }
 
-    Sort(comparer?: (a: T, b: T) => number): void {
+    Sort(comparer: (a: T, b: T) => number): this {
         const data = this._items as T[];
-        comparer ? data.sort(comparer) : data.sort();
+        data.sort(comparer);
         this._items = data;
+        return this;
     }
 
-    Reverse(): void {
+    Reverse(): this {
         let left = 0;
         let right = this._size-1;
         while(left < right) {
@@ -107,6 +108,7 @@ export default class List<T> extends Collection<T> implements IList<T> {
             left++;
             right--;
         }
+        return this;
     }
 
     LastIndexOf(item: T): number {
