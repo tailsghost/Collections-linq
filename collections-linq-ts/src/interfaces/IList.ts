@@ -10,5 +10,5 @@ export default interface IList<T> extends ICollection<T> {
     Sort(comparer: (a:T,b:T) => number) : IEnumerable<T>;
     Reverse():IEnumerable<T>;
     LastIndexOf(item:T): number;
-    Length: number;
+    Count(): number;
 }

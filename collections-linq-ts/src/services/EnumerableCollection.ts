@@ -1,4 +1,5 @@
 import { IEnumerable } from "../interfaces/IEnumerable.js";
+import { HashSet } from "./HashSet.js";
 import List from "./List.js";
 
 export abstract class EnumerableCollection<T> implements IEnumerable<T> {
@@ -72,10 +73,10 @@ export abstract class EnumerableCollection<T> implements IEnumerable<T> {
   }
 
   Count(): number {
-    if(this instanceof Array) {
-      return this.length
+    if (this instanceof Array) {
+      return this.length;
     }
-    
+
     return 0;
   }
 
@@ -84,10 +85,41 @@ export abstract class EnumerableCollection<T> implements IEnumerable<T> {
   }
 
   ToList(): List<T> {
-    if (this instanceof List) {
-      return this as List<T>;
+    if ((this as any).constructor?.name === "List") {
+      return new (globalThis as any).List() as List<T>;
     }
-    return new List<T>();
+
+    if ((this as any).constructor?.name === "HashSet") {
+      return this as unknown as List<T>;
+    }
+
+    return new (globalThis as any).List() as List<T>;
+  }
+
+  ToHashSet(): HashSet<T> {
+    if ((this as any).constructor?.name === "List") {
+      return (new (globalThis as any).HashSet() as HashSet<T>).AddIterable(
+        this
+      );
+    }
+
+    if ((this as any).constructor?.name === "HashSet") {
+      return this as unknown as HashSet<T>;
+    }
+
+    return new (globalThis as any).HashSet() as HashSet<T>;
+  }
+
+  ToSet(): Set<T> {
+        if ((this as any).constructor?.name === "List") {
+      return new (globalThis as any).Set() as Set<T>;
+    }
+
+    if ((this as any).constructor?.name === "HashSet") {
+      return this as unknown as Set<T>;
+    }
+
+    return new (globalThis as any).Set() as Set<T>;
   }
 
   ForEach(action: (item: T) => void): void {
