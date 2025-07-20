@@ -1,5 +1,7 @@
+import { IEnumerable } from "../interfaces/IEnumerable.js";
 import IList from "../interfaces/IList.js";
 import { Collection } from "./Collection.js";
+import { HashSet } from "./HashSet.js";
 
 export default class List<T> extends Collection<T> implements IList<T> {
   protected _size: number;
@@ -9,6 +11,10 @@ export default class List<T> extends Collection<T> implements IList<T> {
 
   ToArray(): T[] {
     return this._items as T[];
+  }
+
+  ToHashSet(): HashSet<T> {
+    return new HashSet<T>().AddIterable(this)
   }
 
   Length(): number {
@@ -23,11 +29,12 @@ export default class List<T> extends Collection<T> implements IList<T> {
     this._size = 0;
   }
 
-  SetList(list: List<T>): void {
+  SetList(list: Iterable<T>): List<T> {
     this._items = new Array<T>(this._capacity)
-    for(let i = 0; i < list.Length();i++) {
-      this.Set(i, list.Get(i))
-    }
+    for(const x of list)
+      this._items.push(x)
+
+    return this;
   }
 
   private EnsureCapacity(min: number) {

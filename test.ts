@@ -35,7 +35,8 @@ const start1 = performance.now();
 const list = Enumerable.Range(0, 1_000_000)
                         .Where(x => x % 2 == 0)
                         .Select(x => new Elem(x))
-                        .Select(x => new Elem(x.num / 2));
+                        .Select(x => new Elem(x.num / 2))
+                        .ToHashSet();
 
 
 

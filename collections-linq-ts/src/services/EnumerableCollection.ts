@@ -85,42 +85,16 @@ export abstract class EnumerableCollection<T> implements IEnumerable<T> {
   }
 
   ToList(): List<T> {
-    if ((this as any).constructor?.name === "List") {
-      return new (globalThis as any).List() as List<T>;
+    if (this instanceof List) {
+      return this as List<T>;
     }
-
-    if ((this as any).constructor?.name === "HashSet") {
-      return this as unknown as List<T>;
-    }
-
-    return new (globalThis as any).List() as List<T>;
+    return new List<T>().SetList(this);
   }
 
-  ToHashSet(): HashSet<T> {
-    if ((this as any).constructor?.name === "List") {
-      return (new (globalThis as any).HashSet() as HashSet<T>).AddIterable(
-        this
-      );
+    ToHashSet(): HashSet<T> {
+      return new HashSet<T>().AddIterable(this);
     }
-
-    if ((this as any).constructor?.name === "HashSet") {
-      return this as unknown as HashSet<T>;
-    }
-
-    return new (globalThis as any).HashSet() as HashSet<T>;
-  }
-
-  ToSet(): Set<T> {
-        if ((this as any).constructor?.name === "List") {
-      return new (globalThis as any).Set() as Set<T>;
-    }
-
-    if ((this as any).constructor?.name === "HashSet") {
-      return this as unknown as Set<T>;
-    }
-
-    return new (globalThis as any).Set() as Set<T>;
-  }
+  
 
   ForEach(action: (item: T) => void): void {
     for (const x of this) action(x);

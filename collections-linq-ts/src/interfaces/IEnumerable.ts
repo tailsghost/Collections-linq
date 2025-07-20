@@ -15,6 +15,7 @@ export interface IEnumerable<T> extends Iterable<T> {
   Count(): number;
   ToArray(): T[];
   ToList(): List<T>;
+  ToHashSet(): HashSet<T>;
   ForEach(action: (item: T) => void): void;
   Min(selector?: (item: T) => number): number | null;
   Max(selector?: (item: T) => number): number | null;
