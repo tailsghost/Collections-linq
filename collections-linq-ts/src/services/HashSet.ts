@@ -9,6 +9,10 @@ export class HashSet<T> extends EnumerableCollection<T> {
     this._sets = new Set();
   }
 
+  Count(): number {
+    return this._sets.size
+  }
+
   ToSetAsync(): Promise<Set<T>> {
   return new Promise((resolve) => {
     resolve(this._sets);

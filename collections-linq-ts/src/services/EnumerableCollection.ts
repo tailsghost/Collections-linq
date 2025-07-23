@@ -6,7 +6,7 @@ export abstract class EnumerableCollection<T> implements IEnumerable<T> {
   abstract [Symbol.iterator](): Iterator<T>;
 
   Where(predicate: (item: T) => boolean): IEnumerable<T> {
-    const result = new List<T>(this.Count() / 2);
+    const result = new List<T>(this.Count() / 4);
     for (const x of this) if (predicate(x)) result.Add(x);
     return result;
   }
@@ -76,7 +76,6 @@ export abstract class EnumerableCollection<T> implements IEnumerable<T> {
     if (this instanceof Array) {
       return this.length;
     }
-
     return 0;
   }
 
