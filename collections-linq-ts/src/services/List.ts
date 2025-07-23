@@ -13,8 +13,8 @@ export default class List<T> extends Collection<T> implements IList<T> {
     return this._items as T[];
   }
 
-  ToHashSet(): HashSet<T> {
-    return new HashSet<T>().AddIterable(this)
+  ToList(): List<T> {
+    return this;
   }
 
   Length(): number {
@@ -29,11 +29,10 @@ export default class List<T> extends Collection<T> implements IList<T> {
     this._size = 0;
   }
 
-  SetList(list: Iterable<T>): List<T> {
+  SetList(list: IEnumerable<T>): List<T> {
     this._items = new Array<T>(this._capacity)
     for(const x of list)
       this._items.push(x)
-
     return this;
   }
 

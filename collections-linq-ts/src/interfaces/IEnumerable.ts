@@ -1,6 +1,6 @@
-import { HashSet } from "../services/HashSet.js";
-import List from "../services/List.js";
 
+import List from "../services/List.js";
+type HashSet<T> = import('../services/HashSet.js').HashSet<T>;
 
 export interface IEnumerable<T> extends Iterable<T> {
   Where(predicate: (item: T) => boolean): IEnumerable<T>;
@@ -9,13 +9,20 @@ export interface IEnumerable<T> extends Iterable<T> {
   Take(count: number): IEnumerable<T>;
   Any(predicate?: (item: T) => boolean): boolean;
   First(predicate?: (item: T) => boolean): T;
-  FirstOrDefault(predicate?: (item: T) => boolean, defaultValue?: T | null): T | null;
+  FirstOrDefault(
+    predicate?: (item: T) => boolean,
+    defaultValue?: T | null
+  ): T | null;
   Last(predicate?: (item: T) => boolean): T;
-  LastOrDefault(predicate?: (item: T) => boolean, defaultValue?: T | null): T | null;
+  LastOrDefault(
+    predicate?: (item: T) => boolean,
+    defaultValue?: T | null
+  ): T | null;
   Count(): number;
   ToArray(): T[];
   ToList(): List<T>;
-  ToHashSet(): HashSet<T>;
+  ToHashSetAsync(): Promise<HashSet<T>>;
+  ToSetAsync(): Promise<Set<T>>;
   ForEach(action: (item: T) => void): void;
   Min(selector?: (item: T) => number): number | null;
   Max(selector?: (item: T) => number): number | null;

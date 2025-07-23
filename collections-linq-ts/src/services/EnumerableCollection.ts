@@ -1,6 +1,6 @@
 import { IEnumerable } from "../interfaces/IEnumerable.js";
-import { HashSet } from "./HashSet.js";
 import List from "./List.js";
+type HashSet<T> = import("./HashSet").HashSet<T>;
 
 export abstract class EnumerableCollection<T> implements IEnumerable<T> {
   abstract [Symbol.iterator](): Iterator<T>;
@@ -85,16 +85,24 @@ export abstract class EnumerableCollection<T> implements IEnumerable<T> {
   }
 
   ToList(): List<T> {
-    if (this instanceof List) {
-      return this as List<T>;
-    }
     return new List<T>().SetList(this);
   }
 
-    ToHashSet(): HashSet<T> {
-      return new HashSet<T>().AddIterable(this);
-    }
-  
+  async ToHashSetAsync(): Promise<HashSet<T>> {
+    const module = await import(new URL("./HashSet.js", import.meta.url).href);
+    const HashSet = module.HashSet as { new (): HashSet<T> };
+    return new Promise<HashSet<T>>((resolve) => {
+      const result = new HashSet().AddIterable(this);
+      resolve(result);
+    });
+  }
+
+  async ToSetAsync(): Promise<Set<T>> {
+  const module = await import(new URL("./HashSet.js", import.meta.url).href);
+  const HashSet = module.HashSet as { new (): HashSet<T> };
+  const result = await new HashSet().AddIterable(this).ToSetAsync();
+  return result;
+}
 
   ForEach(action: (item: T) => void): void {
     for (const x of this) action(x);
