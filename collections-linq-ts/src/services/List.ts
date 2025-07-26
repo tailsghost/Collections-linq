@@ -1,7 +1,6 @@
-import { IEnumerable } from "../interfaces/IEnumerable.js";
 import IList from "../interfaces/IList.js";
 import { Collection } from "./Collection.js";
-import { HashSet } from "./HashSet.js";
+import Enumerable from "./Enumerable.js";
 
 export default class List<T> extends Collection<T> implements IList<T> {
   protected _size: number;
@@ -29,7 +28,7 @@ export default class List<T> extends Collection<T> implements IList<T> {
     this._size = 0;
   }
 
-  SetList(list: IEnumerable<T>): List<T> {
+  SetList(list: Iterable<T>): List<T> {
     this._items = new Array<T>(this._capacity)
     for(const x of list)
       this._items.push(x)
@@ -110,14 +109,14 @@ export default class List<T> extends Collection<T> implements IList<T> {
     return value;
   }
 
-  Sort(comparer: (a: T, b: T) => number): this {
+  Sort(comparer: (a: T, b: T) => number): Enumerable<T> {
     const data = this._items as T[];
     data.sort(comparer);
     this._items = data;
-    return this;
+    return new Enumerable<T>(this._items as T[]);
   }
 
-  Reverse(): this {
+  Reverse(): Enumerable<T> {
     let left = 0;
     let right = this._size - 1;
     while (left < right) {
@@ -127,7 +126,7 @@ export default class List<T> extends Collection<T> implements IList<T> {
       left++;
       right--;
     }
-    return this;
+    return new Enumerable<T>(this._items as T[]);
   }
 
   LastIndexOf(item: T): number {

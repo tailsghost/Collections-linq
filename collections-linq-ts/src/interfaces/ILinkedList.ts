@@ -1,6 +1,4 @@
-import { IEnumerable } from "./IEnumerable.js";
-
-export interface ILinkedList<T> extends IEnumerable<T> {
+export interface ILinkedList<T> {
     AddFirst(item: T): void;
     AddLast(item: T): void;
     RemoveFirst(item: T): T | null;

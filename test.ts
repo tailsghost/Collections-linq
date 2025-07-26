@@ -32,13 +32,13 @@ const elapsed = end - start;
 console.log(elapsed);
 
 const start1 = performance.now();
-const list = await Enumerable.Range(0,1_000_000)
+const list = Enumerable.Range(0,1_000_000)
                         .Where(x => x % 2 == 0)
                         .Select(x => new Elem(x))
                         .Select(x => new Elem(x.num / 2))
-                        .ToHashSetAsync()
-                        .then(x => x.Where(z => (z.num / 2) % 2 == 0))
-                        .then(x => x.FirstOrDefault(z => z.num != 0 && z.num % 2 == 0));
+                        .ToHashSet()
+                        .Where(z => (z.num / 2) % 2 == 0)
+                        .FirstOrDefault(z => z.num != 0 && z.num % 2 == 0);
 
 
 

@@ -1,11 +1,9 @@
-import { EnumerableCollection } from "./EnumerableCollection.js";
 import List from "./List.js";
 
-export class HashSet<T> extends EnumerableCollection<T> {
+export class HashSet<T> {
   private _sets: Set<T>;
 
   constructor() {
-    super();
     this._sets = new Set();
   }
 
@@ -13,10 +11,8 @@ export class HashSet<T> extends EnumerableCollection<T> {
     return this._sets.size
   }
 
-  ToSetAsync(): Promise<Set<T>> {
-  return new Promise((resolve) => {
-    resolve(this._sets);
-  });
+  ToSet(): Set<T> {
+  return this._sets;
 }
 
   ToList(): List<T> {
