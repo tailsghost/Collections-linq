@@ -38,7 +38,10 @@ const list = Enumerable.Range(0,1_000_000)
                         .Select(x => new Elem(x.num / 2))
                         .ToHashSet()
                         .Where(z => (z.num / 2) % 2 == 0)
-                        .FirstOrDefault(z => z.num != 0 && z.num % 2 == 0);
+                        .OrderByDescending(x => x.num >1)
+                        .Reverse()
+                        .Distinct()
+                        .FirstOrDefault(x => x.num >1);
 
 
 

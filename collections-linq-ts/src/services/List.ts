@@ -8,14 +8,6 @@ export default class List<T> extends Collection<T> implements IList<T> {
 
   private _capacity = 0;
 
-  ToArray(): T[] {
-    return this._items as T[];
-  }
-
-  ToList(): List<T> {
-    return this;
-  }
-
   Length(): number {
     return this._size;
   }
@@ -31,7 +23,7 @@ export default class List<T> extends Collection<T> implements IList<T> {
   SetList(list: Iterable<T>): List<T> {
     this._items = new Array<T>(this._capacity)
     for(const x of list)
-      this._items.push(x)
+      this.Add(x)
     return this;
   }
 
@@ -113,7 +105,7 @@ export default class List<T> extends Collection<T> implements IList<T> {
     const data = this._items as T[];
     data.sort(comparer);
     this._items = data;
-    return new Enumerable<T>(this._items as T[]);
+    return new Enumerable<T>(this);
   }
 
   Reverse(): Enumerable<T> {
@@ -126,7 +118,7 @@ export default class List<T> extends Collection<T> implements IList<T> {
       left++;
       right--;
     }
-    return new Enumerable<T>(this._items as T[]);
+    return new Enumerable<T>(this);
   }
 
   LastIndexOf(item: T): number {
