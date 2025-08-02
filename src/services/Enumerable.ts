@@ -26,7 +26,7 @@ export default class Enumerable<T> implements IEnumerable<T> {
     return new Enumerable(src);
   }
 
-  // Empty возвращает пустой Enumerable
+  // Возвращает пустой Enumerable
   public static Empty<U>(): Enumerable<U> {
     return new Enumerable<U>([]);
   }

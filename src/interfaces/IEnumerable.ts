@@ -2,7 +2,7 @@ import Enumerable from "../services/Enumerable";
 import List from "../services/List";
 
 export default interface IEnumerable<T> {
-  // Where фильтрует элементы по условию
+  // Фильтрует элементы по условию
   Where(predicate: (item: T) => boolean): Enumerable<T>;
   // Определяет проекцию выбранных значений
   Select<U>(selector: (item: T) => U): Enumerable<U>;
