@@ -66,11 +66,11 @@ import Enumerable from "collections-linq-ts";
 - `Min(selector?: (item: T) => number): number | null`
   Возвращает минимальное значение
 - `Max(selector?: (item: T) => number): number | null`
-  // Возвращает максильное значение
+   Возвращает максильное значение
 - `Sum(selector?: (item: T) => number): number`
   Возвращает сумму
 - `Cast<U>(): Enumerable<U>`
-  Преобрает T в U
+  Приводит элементы к другому типу
 - `Reverse(): Enumerable<T>`
   Переворачивает коллекцию
 - `Distinct(): Enumerable<T>`
