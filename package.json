@@ -10,5 +10,9 @@
   "scripts": {
     "build": "tsc"
   },
-  "keywords": ["List", "collections", "linq"]
+  "keywords": ["List", "collections", "linq"],
+  "repository": {
+    "type": "git",
+     "url": "https://github.com/tailsghost/Collections-linq.git"
+  }
 }
