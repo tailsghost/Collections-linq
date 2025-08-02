@@ -1,3 +1,3 @@
-module github.com/tailsghost/collections-linq-go
+module github.com/tailsghost/Collections-linq/collections-linq-go
 
 go 1.24.4
