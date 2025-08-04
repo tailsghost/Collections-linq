@@ -45,6 +45,22 @@ export default class Enumerable<T> implements IEnumerable<T> {
     return new Enumerable(result);
   }
 
+  // Сводит набор коллекций в одну
+  SelectMany<U>(selector: (item: T) => U[]): Enumerable<U> {
+  let total = 0;
+  for (const x of this._src) {
+    total += selector(x).length;
+  }
+
+  const result = new List<U>(total);
+  for (const x of this._src) {
+    for (const y of selector(x)) {
+      result.Add(y);
+    }
+  }
+  return new Enumerable(result);
+}
+
   // Пропускает первые n элементов
   Skip(count: number): Enumerable<T> {
     const result = this.Clone(2)._src as List<T>;

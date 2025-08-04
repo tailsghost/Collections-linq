@@ -35,6 +35,8 @@ import Enumerable from "collections-linq-ts";
   Фильтрует элементы по условию
 - `Select<U>(selector: (item: T) => U): Enumerable<U>`
   Определяет проекцию выбранных значений
+- `SelectMany<U>(selector: (item: T) => U[]): Enumerable<U>`
+  Сводит набор коллекций в одну
 - `Skip(count: number): Enumerable<T>`
   Пропускает первые n элементов
 - `Take(count: number): Enumerable<T>`

@@ -6,6 +6,8 @@ export default interface IEnumerable<T> {
   Where(predicate: (item: T) => boolean): Enumerable<T>;
   // Определяет проекцию выбранных значений
   Select<U>(selector: (item: T) => U): Enumerable<U>;
+  //Сводит набор коллекций в одну
+  SelectMany<U>(selector: (item: T) => U[]): Enumerable<U>
   // Пропускает первые n элементов
   Skip(count: number): Enumerable<T>;
   // Возвращает первые n элементы
