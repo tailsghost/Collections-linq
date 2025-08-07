@@ -5,7 +5,7 @@
 ## Установка
 
 ```bash
-npm install collections-linq-ts
+npm install linq-collections-ts
 ```
 
 ## Импорт
